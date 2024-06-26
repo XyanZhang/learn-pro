@@ -1,11 +1,23 @@
-import { Global, Module } from '@nestjs/common';
-import { databaseProviders } from './database.providers';
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import PhotoEntity from '../../entity/photo.entity'
 
-@Global()
 @Module({
-  providers: [...databaseProviders],
-  exports: [...databaseProviders],
+  imports: [
+    TypeOrmModule.forRoot({
+      // 你的数据库连接配置
+      type: 'mysql', // 数据库类型
+      host: '192.168.4.55',
+      port: 3306,
+      username: 'ken',
+      password: '123456',
+      database: 'test',
+      // 其他配置...
+      logging: true,
+      entities: [
+        PhotoEntity
+      ],
+    }),
+  ],
 })
-export default class DatabaseModule {
-
-}
+export class DatabaseModule {};
