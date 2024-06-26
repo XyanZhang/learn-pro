@@ -1,4 +1,4 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post, Query } from '@nestjs/common';
 import { PhotoService } from './index.service';
 import Photo from 'src/entity/photo.entity';
 import { Repository } from 'typeorm';
@@ -19,17 +19,28 @@ export class PhotoController {
 
   @Get('/list')
   async getInfo(): Promise<any> {
-    // const photo = new Photo();
-    // photo.name = 'kenan';
-    // photo.description = 'demo desp';
-    // photo.filename = '';
-    // photo.url = '';
-    // photo.views = 1;
-    // photo.isPublished = true;
-
-
     let res = await this.photoEntiryRepo.find();
-    console.log(res)
+    return res
+  }
+  @Get('/detail')
+  async getDetail(@Query('id') id): Promise<any> {
+    let res = await this.photoEntiryRepo.findOne({
+      where: { id: id }
+    });
+    return res || []
+  }
+  @Post('/save')
+  async savePhone(@Body() data) {
+    console.log(data)
+    const photo = new Photo();
+    photo.name = data.name;
+    photo.description = 'demo desp';
+    photo.filename = '';
+    photo.url = '';
+    photo.views = 1;
+    photo.isPublished = true;
+
+    let res = await this.photoEntiryRepo.save(photo)
     return res
   }
 }
