@@ -5,11 +5,19 @@ export default class Photo {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 500 })
-  name: string;
+  @Column({ length: 50 })
+  title: string;
+  
+  @Column({
+    type: 'varchar',
+    nullable: true, // 设置字段为非必填
+    length: 20 
+  })
+  shortTitle: string;
 
   @Column('text')
   description: string;
+
 
   @Column()
   filename: string;
@@ -17,9 +25,15 @@ export default class Photo {
   @Column()
   url: string;
 
-  @Column('int')
+  @Column({
+    type: 'int',
+    nullable: true // 设置字段为非必填
+  })
   views: number;
 
-  @Column()
+  @Column({
+    type: "boolean",
+    nullable: true // 设置字段为非必填
+  })
   isPublished: boolean;
 }

@@ -33,10 +33,10 @@ export class PhotoController {
   async savePhone(@Body() data) {
     console.log(data)
     const photo = new Photo();
-    photo.name = data.name;
-    photo.description = 'demo desp';
+    photo.title = data.title;
+    photo.description = data.description
     photo.filename = '';
-    photo.url = '';
+    photo.url = data.url;
     photo.views = 1;
     photo.isPublished = true;
 

@@ -1,3 +1,4 @@
+import { PhotoService } from './../photo/index.service';
 import { Body, Controller, FileTypeValidator, Get, Inject, MaxFileSizeValidator, Param, ParseFilePipe, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UploadService } from './index.service';
 import { Repository } from 'typeorm';
@@ -8,7 +9,6 @@ import { extname } from 'path';
 @Controller('upload')
 export class UploadController {
   constructor(
-    private readonly UploadService: UploadService,
   ) {}
 
   @Post()
@@ -21,6 +21,6 @@ export class UploadController {
     //   ],
     // }),
   ) file: Express.Multer.File) {
-     return { success: file };
+    return file;
   }
 }

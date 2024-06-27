@@ -14,6 +14,7 @@ import PhotoEntity from '../../entity/photo.entity'
       database: 'test',
       // 其他配置...
       logging: true,
+      synchronize: true,
       entities: [
         PhotoEntity
       ],
