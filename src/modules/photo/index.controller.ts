@@ -3,6 +3,7 @@ import { PhotoService } from './index.service';
 import Photo from 'src/entity/photo.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UnLoginException } from 'src/filter/unlogin.filter';
 
 @Controller('photo')
 export class PhotoController {
@@ -15,6 +16,11 @@ export class PhotoController {
   @Get()
   getHello(): string {
     return this.photoService.getList();
+  }
+
+  @Get('/notLogin') 
+  async notLogin(): Promise<any> {
+    throw new UnLoginException();
   }
 
   @Get('/list')
