@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './modules/database/database.module';
@@ -7,6 +7,7 @@ import { UploadModule } from './modules/upload/index.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpCustomException } from './filter/http.filter';
 import { UnloginFilter } from './filter/unlogin.filter';
+import { LogMiddleware } from './middleware/log.middleware';
 
 @Module({
   imports: [DatabaseModule, PhotoModule, UploadModule],
@@ -37,4 +38,8 @@ import { UnloginFilter } from './filter/unlogin.filter';
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LogMiddleware).forRoutes('*')
+  }
+}
