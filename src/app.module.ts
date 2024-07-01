@@ -4,16 +4,21 @@ import { AppService } from './app.service';
 import { DatabaseModule } from './modules/database/database.module';
 import { PhotoModule } from './modules/photo/index.module';
 import { UploadModule } from './modules/upload/index.module';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpCustomException } from './filter/http.filter';
 import { UnloginFilter } from './filter/unlogin.filter';
 import { LogMiddleware } from './middleware/log.middleware';
+import { ResponseInterceptor } from './interceptor/response.interceptor';
 
 @Module({
   imports: [DatabaseModule, PhotoModule, UploadModule],
   controllers: [AppController],
   providers: [
     AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
     {
       provide: APP_FILTER,
       useClass: HttpCustomException // Nest 会把所有 token 为 APP_FILTER 的 provider 注册为全局 Exception Filter。
