@@ -1,15 +1,18 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export default class Photo {
+export default class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 500 })
-  name: string;
+  @Column({ length: 500, nullable: true, })
+  username: string;
 
-  @Column()
-  realName: string;
+  @Column({
+    name: 'nick_name',
+    nullable: true,
+  })
+  nickName: string;
 
   @Column()
   mobile: string;
@@ -17,10 +20,19 @@ export default class Photo {
   @Column()
   email: string;
   
-  @Column()
+  @Column({
+    nullable: true,
+  })
   idCard: string;
 
   @Column()
   pwd: string;
+
+  @Column({
+    type: 'bigint',
+    name: 'registration_date',
+    nullable: true,
+  })
+  registrationDate: string
 
 }

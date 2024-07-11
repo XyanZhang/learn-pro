@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import PhotoEntity from '../../entity/photo.entity'
+import UserEntity from '../../entity/user.entity'
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import PhotoEntity from '../../entity/photo.entity'
       logging: true,
       synchronize: true,
       entities: [
-        PhotoEntity
+        PhotoEntity,
+        UserEntity
       ],
     }),
   ],

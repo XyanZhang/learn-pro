@@ -9,9 +9,10 @@ import { HttpCustomException } from './filter/http.filter';
 import { UnloginFilter } from './filter/unlogin.filter';
 import { LogMiddleware } from './middleware/log.middleware';
 import { ResponseInterceptor } from './interceptor/response.interceptor';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
-  imports: [DatabaseModule, PhotoModule, UploadModule],
+  imports: [DatabaseModule, PhotoModule, UploadModule, UserModule],
   controllers: [AppController],
   providers: [
     AppService,
