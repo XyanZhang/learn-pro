@@ -20,6 +20,10 @@ import UserEntity from '../../entity/user.entity'
         PhotoEntity,
         UserEntity
       ],
+      connectorPackage: 'mysql2',
+      extra: {
+        authPlugin: 'sha256_password'
+      }
     }),
   ],
 })

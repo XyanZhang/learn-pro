@@ -14,7 +14,9 @@ export default class User {
   })
   nickName: string;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   mobile: string;
 
   @Column()
@@ -28,20 +30,18 @@ export default class User {
   @Column()
   pwd: string;
 
-  @Column({
-    type: 'bigint',
-    name: 'registration_date',
-    nullable: true,
-  })
-  registrationDate: string
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  registrationDate: Date;
 
   @CreateDateColumn({
+    type: 'timestamp',
     name: 'create_time',
     nullable: true,
   })
   createTime: string
-  
+
   @UpdateDateColumn ({
+    type: 'timestamp',
     name: 'update_time',
     nullable: true,
   })

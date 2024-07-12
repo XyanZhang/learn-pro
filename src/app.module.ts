@@ -6,6 +6,7 @@ import { PhotoModule } from './modules/photo/index.module';
 import { UploadModule } from './modules/upload/index.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpCustomException } from './filter/http.filter';
+import { TypeOrmExceptionFilter } from './filter/database.filter';
 import { UnloginFilter } from './filter/unlogin.filter';
 import { LogMiddleware } from './middleware/log.middleware';
 import { ResponseInterceptor } from './interceptor/response.interceptor';
@@ -27,6 +28,11 @@ import { UserModule } from './modules/user/user.module';
     {
       provide: APP_FILTER,
       useClass: UnloginFilter
+    },
+    
+    {
+      provide: APP_FILTER,
+      useClass: TypeOrmExceptionFilter
     },
     // 其余的全局 Guard、Interceptor、Pipe 也是这样注册：
     {
