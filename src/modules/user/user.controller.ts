@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Post, Query } from "@nestjs/common";
 import User from "src/entity/user.entity";
 import { UserService } from './user.service';
 
@@ -8,9 +8,11 @@ export class UserController {
     private readonly userService: UserService
   ) {
   }
-  @Get()
-  getHello() {
-    return 'hello'
+  @Get("/:id")
+  async getDetail(@Param() param) {
+    // console.log(param);
+    let res = await this.userService.detail(+param.id)
+    return res
   }
 
   @Post('/save')
